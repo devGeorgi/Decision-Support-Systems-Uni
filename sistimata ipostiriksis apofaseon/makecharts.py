@@ -1,10 +1,8 @@
-import os
 import pandas as pd
 import joblib
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
-from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report, confusion_matrix
 
 # Load the dataset
 data = pd.read_csv('processed_data.csv', delimiter=',', header=None)
@@ -23,7 +21,7 @@ y_pred = clf.predict(X)
 cm = confusion_matrix(y, y_pred)
 
 # Print classification report
-print("\nClasification report: \n",classification_report(y, y_pred))
+print("\nClassification report: \n", classification_report(y, y_pred))
 
 # Define custom feature names
 feature_names = [
@@ -35,10 +33,7 @@ feature_names = [
     'Telephone', 'Foreign worker'
 ]
 
-# Get the current working directory
-current_directory = os.getcwd()
-
-# Plot and save the first chart
+# Plot and show the first chart
 plt.figure(figsize=(12, 6))
 plt.bar(range(len(clf.feature_importances_[:10])), clf.feature_importances_[:10], tick_label=feature_names[:10])
 plt.xlabel('Feature')
@@ -46,13 +41,12 @@ plt.ylabel('Importance')
 plt.title('Feature Importances (1-10)')
 plt.tight_layout()
 
-# Save the plot as a PNG file
-png_file_path_1 = os.path.join(current_directory, 'feature_importances_part1.png')
-plt.savefig(png_file_path_1)
+# Show the plot
+plt.show()
 
 plt.close()
 
-# Plot and save the second chart
+# Plot and show the second chart
 plt.figure(figsize=(12, 6))
 plt.bar(range(len(clf.feature_importances_[10:])), clf.feature_importances_[10:], tick_label=feature_names[10:])
 plt.xlabel('Feature')
@@ -60,9 +54,8 @@ plt.ylabel('Importance')
 plt.title('Feature Importances (11-20)')
 plt.tight_layout()
 
-# Save the second plot as a PNG file
-png_file_path_2 = os.path.join(current_directory, 'feature_importances_part2.png')
-plt.savefig(png_file_path_2)
+# Show the second plot
+plt.show()
 
 plt.close()
 
@@ -73,8 +66,7 @@ plt.xlabel('Predicted')
 plt.ylabel('True')
 plt.title('Confusion Matrix')
 
-# Save the confusion matrix plot as a PNG file
-confusion_matrix_path = os.path.join(current_directory, 'confusion_matrix.png')
-plt.savefig(confusion_matrix_path)
+# Show the confusion matrix plot
+plt.show()
 
 plt.close()
